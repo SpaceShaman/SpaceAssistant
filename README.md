@@ -1,16 +1,16 @@
-# voice-assistant
+# Voice Assistant
 
-This template should help get you started developing with Vue 3 in Vite.
+Voice assistant built with [Vue.js](https://vuejs.org/) and [OpenAI API](https://platform.openai.com/docs/).
 
-## Recommended IDE Setup
+## Dependencies
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- [Vue.js](https://vuejs.org/)
+- [OpenAI API](https://platform.openai.com/docs/)
+- [SVG Repo](https://www.svgrepo.com/)
 
 ## Project Setup
+
+### Install Dependencies
 
 ```sh
 npm install
@@ -26,10 +26,4 @@ npm run dev
 
 ```sh
 npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
