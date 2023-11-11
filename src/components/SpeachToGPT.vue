@@ -10,6 +10,7 @@ const transciribing = ref(false)
 const mediaRecorder = ref(null)
 const audioChunks = ref([])
 const transcription = ref('')
+const textFromGPT = ref('')
 
 function startRecording() {
   navigator.mediaDevices
@@ -63,7 +64,21 @@ async function transcribeAudio() {
   })
 
   console.log(transcription.value)
+  generateText()
   transciribing.value = false
+}
+
+async function generateText() {
+  const response = await openai.chat.completions.create({
+    messages: [
+      { role: 'system', content: 'You are a helpful assistant.' },
+      { role: 'user', content: transcription.value }
+    ],
+    model: 'gpt-4'
+  })
+  textFromGPT.value = response.choices[0].message.content
+
+  console.log(textFromGPT.value)
 }
 </script>
 
@@ -75,6 +90,8 @@ async function transcribeAudio() {
     <div class="microphone-inner"></div>
   </div>
   <p v-if="transcription">{{ transcription }}</p>
+  <br />
+  <p v-if="textFromGPT">{{ textFromGPT }}</p>
 </template>
 
 <style scoped>
