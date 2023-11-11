@@ -7,6 +7,7 @@ Voice assistant built with [Vue.js](https://vuejs.org/) and [OpenAI API](https:/
 - [Vue.js](https://vuejs.org/)
 - [OpenAI API](https://platform.openai.com/docs/)
 - [SVG Repo](https://www.svgrepo.com/)
+- [Axios](https://axios-http.com/docs/intro)
 
 ## Project Setup
 
