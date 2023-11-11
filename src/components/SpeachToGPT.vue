@@ -1,17 +1,17 @@
 <script setup>
-import axios from 'axios'
+import OpenAI from 'openai'
 import { ref } from 'vue'
 
 const openaiApiKey = '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' // Replace with your OpenAI API key
-const openaiModel = 'whisper-1' // Replace with the OpenAI model you want to use
+const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true })
 
 const recording = ref(false)
 const transciribing = ref(false)
 const mediaRecorder = ref(null)
 const audioChunks = ref([])
-const treanscription = ref('')
+const transcription = ref('')
 
-const startRecording = () => {
+function startRecording() {
   navigator.mediaDevices
     .getUserMedia({ audio: true })
     .then((stream) => {
@@ -33,7 +33,7 @@ const startRecording = () => {
     .catch((error) => console.error('Error accessing the microphone:', error))
 }
 
-const stopRecording = () => {
+function stopRecording() {
   transciribing.value = true
   recording.value = false
   if (mediaRecorder.value) {
@@ -47,45 +47,34 @@ const stopRecording = () => {
   }
 }
 
-const transcribeAudio = () => {
+async function transcribeAudio() {
   if (audioChunks.value.length === 0) {
     return
   }
 
+  // Create audio stream from audio chunks captured from the microphone input in wav format
   const audioBlob = new Blob(audioChunks.value, { type: 'audio/wav' })
+  const audio = new File([audioBlob], 'audio.wav', { type: 'audio/wav' })
 
-  const formData = new FormData()
-  formData.append('file', audioBlob, 'audio.wav')
-  formData.append('model', openaiModel)
+  transcription.value = await openai.audio.transcriptions.create({
+    model: 'whisper-1',
+    file: audio,
+    response_format: 'text'
+  })
 
-  // Send audio to the OpenAI Speech-to-Text API
-  axios
-    .post('https://api.openai.com/v1/audio/transcriptions', formData, {
-      headers: {
-        Authorization: `Bearer ${openaiApiKey}`,
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-    .then((response) => {
-      console.log('Transcription from OpenAI:', response.data)
-      treanscription.value = response.data.text
-      transciribing.value = false
-      // Handle transcription results here
-    })
-    .catch((error) => {
-      console.error('Error during transcription from OpenAI:', error)
-    })
+  console.log(transcription.value)
+  transciribing.value = false
 }
 </script>
 
 <template>
-  <div v-if="!recording & !transciribing" @click="startRecording" class="microphone rounded">
+  <div v-if="!recording & !transciribing" @click.stop="startRecording" class="microphone rounded">
     <div class="microphone-inner rounded"></div>
   </div>
-  <div v-if="recording & !transciribing" @click="stopRecording" class="microphone">
+  <div v-if="recording & !transciribing" @click.stop="stopRecording" class="microphone">
     <div class="microphone-inner"></div>
   </div>
-  <p v-if="treanscription">{{ treanscription }}</p>
+  <p v-if="transcription">{{ transcription }}</p>
 </template>
 
 <style scoped>
