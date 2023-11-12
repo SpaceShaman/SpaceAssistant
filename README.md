@@ -6,6 +6,8 @@ It works according to the following scheme: Audio from microphone -> StT -> GPT4
 ## Dependencies
 
 - [Vue.js](https://vuejs.org/)
+- [Pinia](https://pinia.vuejs.org)
+- [vue-cookies](https://github.com/cmp-cc/vue-cookies)
 - [OpenAI API](https://platform.openai.com/docs/)
 - [SVG Repo](https://www.svgrepo.com/)
 
