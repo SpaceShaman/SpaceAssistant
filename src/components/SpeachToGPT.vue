@@ -32,8 +32,8 @@ const stop = async () => {
 </script>
 
 <template>
-  <div v-if="!recording & !transciribing" @click.stop="start" class="microphone rounded">
-    <div class="microphone-inner rounded"></div>
+  <div v-if="!recording & !transciribing" @click.stop="start" class="microphone microphone-rounded">
+    <div class="microphone-inner microphone-rounded"></div>
   </div>
   <div v-if="recording & !transciribing" @click.stop="stop" class="microphone">
     <div class="microphone-inner"></div>
@@ -44,27 +44,25 @@ const stop = async () => {
 
 <style scoped>
 p {
-  margin: 0 auto;
+  margin-bottom: 0.5rem;
 }
 .microphone {
-  display: block;
   margin: 0 auto;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
   width: 70px;
   height: 70px;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
   padding: 0.4rem;
   cursor: pointer;
-  border-radius: 0.3rem;
-  background-color: var(--vt-c-text-dark-2);
+  background-color: var(--bs-body-color);
 }
 .microphone-inner {
   width: 100%;
   height: 100%;
   border-radius: 0.3rem;
-  background-color: var(--vt-c-text-dark-1);
+  background-color: var(--bs-border-color);
 }
-.rounded {
+.microphone-rounded {
   border-radius: 50%;
 }
 .microphone:hover {

@@ -12,4 +12,5 @@ onMounted(() => {
 <template>
   <input type="text" id="openai-api-key" v-model="store.openaiApiKey" />
   <button @click="store.save">Save</button>
+  <div class="alert alert-primary" role="alert">A simple primary alert—check it out!</div>
 </template>
