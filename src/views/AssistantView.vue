@@ -5,7 +5,7 @@ import SpeachToGPT from '../components/SpeachToGPT.vue'
 <template>
   <header>
     <h1>
-      <img class="logo" src="@/assets/logo.svg" width="50" height="50" />
+      <img class="logo" src="@/assets/logo.svg" width="70" height="70" />
       Voice Assistant
     </h1>
     <p>Click button below and say something...</p>
@@ -23,5 +23,8 @@ header {
 .logo {
   display: inline-block;
   vertical-align: middle;
+}
+p {
+  font-size: 80%;
 }
 </style>

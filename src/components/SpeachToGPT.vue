@@ -76,9 +76,40 @@ async function generateText() {
     ],
     model: 'gpt-4'
   })
-  textFromGPT.value = response.choices[0].message.content
 
+  textFromGPT.value = response.choices[0].message.content
   console.log(textFromGPT.value)
+
+  transformTextToSpeech()
+}
+
+async function transformTextToSpeech() {
+  const response = await openai.audio.speech.create({
+    model: 'tts-1',
+    voice: 'echo',
+    input: textFromGPT.value
+  })
+  console.log('OpenAI API response:', response)
+
+  if (response.ok) {
+    // Retrieve audio data from the response body
+    const audioData = await response.arrayBuffer()
+
+    // Create a new Audio object
+    const audio = new Audio()
+
+    // Convert audio data to a Blob and set it as the source for the Audio object
+    const blob = new Blob([audioData], { type: 'audio/wav' })
+    const audioUrl = URL.createObjectURL(blob)
+    audio.src = audioUrl
+
+    // Play the audio
+    audio.play()
+
+    console.log('Audio playback initiated.')
+  } else {
+    console.error('Error while retrieving audio data from OpenAI API.')
+  }
 }
 </script>
 
@@ -90,7 +121,6 @@ async function generateText() {
     <div class="microphone-inner"></div>
   </div>
   <p v-if="transcription">{{ transcription }}</p>
-  <br />
   <p v-if="textFromGPT">{{ textFromGPT }}</p>
 </template>
 
@@ -101,8 +131,8 @@ p {
 .microphone {
   display: block;
   margin: 0 auto;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   padding: 0.4rem;
