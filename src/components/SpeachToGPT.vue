@@ -47,11 +47,12 @@ p {
   margin-bottom: 0.5rem;
 }
 .microphone {
+  --size: 4rem;
   margin: 0 auto;
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
-  width: 70px;
-  height: 70px;
+  width: var(--size);
+  height: var(--size);
   padding: 0.4rem;
   cursor: pointer;
   background-color: var(--bs-body-color);
