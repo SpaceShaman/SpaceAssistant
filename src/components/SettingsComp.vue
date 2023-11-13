@@ -1,11 +1,16 @@
 <script setup>
 import { SettingsStore } from '@/stores/settings'
+import * as bootstrap from 'bootstrap'
 import { onMounted } from 'vue'
 
 const store = SettingsStore()
 
 onMounted(() => {
   store.load()
+  if (store.openaiApiKey === '' || store.openaiApiKey === null) {
+    const myModal = new bootstrap.Modal('#settingsModal')
+    myModal.show()
+  }
 })
 </script>
 
