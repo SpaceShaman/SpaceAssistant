@@ -1,7 +1,9 @@
-# Voice Assistant
+# Space Assistant
 
 Voice assistant built with [Vue.js](https://vuejs.org/) and [OpenAI API](https://platform.openai.com/docs/).
 It works according to the following scheme: Audio from microphone -> StT -> GPT4 -> TtS
+
+You cen check it out [here](https://spaceshaman.github.io/space-assistant/)
 
 ## Dependencies
 
