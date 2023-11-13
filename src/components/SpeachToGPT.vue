@@ -1,13 +1,19 @@
 <script setup>
+import { SettingsStore } from '@/stores/settings'
 import OpenAI from 'openai'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import AudioRecorder from '../utils/audioRecorder'
 import generateText from '../utils/generateText'
 import textToSpeach from '../utils/textToSpeach'
 import transcribeAudio from '../utils/transcribeAudio'
 
-const openaiApiKey = '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' // Replace with your OpenAI API key
-const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true })
+const store = SettingsStore()
+
+const openai = ref(null)
+onMounted(() => {
+  store.load()
+  openai.value = new OpenAI({ apiKey: store.openaiApiKey, dangerouslyAllowBrowser: true })
+})
 
 const recorder = new AudioRecorder()
 const recording = ref(false)
@@ -24,9 +30,9 @@ const stop = async () => {
   const audio = await recorder.stopRecording()
   recording.value = false
   transciribing.value = true
-  transcription.value = await transcribeAudio(audio, openai)
-  textFromGPT.value = await generateText(transcription.value, openai)
-  await textToSpeach(textFromGPT.value, openai)
+  transcription.value = await transcribeAudio(audio, openai.value)
+  textFromGPT.value = await generateText(transcription.value, openai.value)
+  await textToSpeach(textFromGPT.value, openai.value)
   transciribing.value = false
 }
 </script>

@@ -15,11 +15,7 @@ export const SettingsStore = defineStore('settings', () => {
   }
 
   function loadTheme() {
-    const theme = VueCookies.get('theme')
-    if (theme === undefined) {
-      VueCookies.set('theme', 'dark')
-    }
-    theme.value = VueCookies.get('theme')
+    theme.value = VueCookies.get('theme') || 'dark'
     document.documentElement.setAttribute('data-bs-theme', theme.value)
   }
 

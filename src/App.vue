@@ -1,4 +1,5 @@
 <script setup>
+import SettingsComp from './components/SettingsComp.vue'
 import ThemeSwitch from './components/ThemeSwitch.vue'
 import AssistantView from './views/AssistantView.vue'
 </script>
@@ -6,7 +7,7 @@ import AssistantView from './views/AssistantView.vue'
 <template>
   <AssistantView />
   <ThemeSwitch />
-  <!-- <SettingsComp /> -->
+  <SettingsComp />
 </template>
 
 <style>
