@@ -12,6 +12,11 @@ onMounted(() => {
     myModal.show()
   }
 })
+
+function save() {
+  store.save()
+  window.location.reload()
+}
 </script>
 
 <template>
@@ -69,7 +74,7 @@ onMounted(() => {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" @click="store.save">Save</button>
+          <button type="button" class="btn btn-primary" @click="save">Save</button>
         </div>
       </div>
     </div>
