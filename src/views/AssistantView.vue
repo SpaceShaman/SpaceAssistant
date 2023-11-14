@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import SpeachToGPT from '../components/SpeachToGPT.vue'
 </script>
 

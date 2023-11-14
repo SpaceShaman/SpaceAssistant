@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import SettingsComp from './components/SettingsComp.vue'
 import ThemeSwitch from './components/ThemeSwitch.vue'
 import AssistantView from './views/AssistantView.vue'

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { SettingsStore } from '@/stores/settings'
 import OpenAI from 'openai'
 import { onMounted, ref } from 'vue'

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { SettingsStore } from '@/stores/settings'
 import * as bootstrap from 'bootstrap'
 import { onMounted } from 'vue'
