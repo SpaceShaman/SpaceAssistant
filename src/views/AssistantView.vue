@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SpeachToGPT from '../components/SpeachToGPT.vue'
+import SpeachToGPT from '@/components/SpeachToGPT.vue'
 </script>
 
 <template>
