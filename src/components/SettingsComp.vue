@@ -8,8 +8,8 @@ const store = SettingsStore()
 onMounted(() => {
   store.load()
   if (store.openaiApiKey === '' || store.openaiApiKey === null) {
-    const myModal = new bootstrap.Modal('#settingsModal')
-    myModal.show()
+    const settingsModal = new bootstrap.Modal('#settingsModal')
+    settingsModal.show()
   }
 })
 

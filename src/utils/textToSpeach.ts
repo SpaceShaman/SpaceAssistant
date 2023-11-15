@@ -1,4 +1,6 @@
-export default async (text, openai) => {
+import { OpenAI } from 'openai'
+
+export default async (text: string, openai: OpenAI) => {
   const response = await openai.audio.speech.create({
     model: 'tts-1',
     voice: 'alloy',
@@ -15,8 +17,7 @@ export default async (text, openai) => {
     audio.src = audioUrl
     // Play the audio
     audio.play()
-    console.log('Audio playback initiated.')
   } else {
-    console.error('Error while retrieving audio data from OpenAI API.')
+    throw new Error('No response from OpenAI text to speach')
   }
 }

@@ -9,17 +9,17 @@ import transcribeAudio from '../utils/transcribeAudio'
 
 const store = SettingsStore()
 
-const openai = ref(null)
+const openai = ref<OpenAI>()
 onMounted(() => {
   store.load()
   openai.value = new OpenAI({ apiKey: store.openaiApiKey, dangerouslyAllowBrowser: true })
 })
 
 const recorder = new AudioRecorder()
-const recording = ref(false)
-const transciribing = ref(false)
-const transcription = ref('')
-const textFromGPT = ref('')
+const recording = ref<boolean>(false)
+const transciribing = ref<boolean>(false)
+const transcription = ref<string>('')
+const textFromGPT = ref<string>('')
 
 const start = () => {
   recording.value = true
@@ -27,7 +27,10 @@ const start = () => {
 }
 
 const stop = async () => {
-  const audio = await recorder.stopRecording()
+  if (!openai.value) {
+    throw new Error('OpenAI is not initialized')
+  }
+  const audio: File = await recorder.stopRecording()
   recording.value = false
   transciribing.value = true
   transcription.value = await transcribeAudio(audio, openai.value)
@@ -38,10 +41,14 @@ const stop = async () => {
 </script>
 
 <template>
-  <div v-if="!recording & !transciribing" @click.stop="start" class="microphone microphone-rounded">
+  <div
+    v-if="!recording && !transciribing"
+    @click.stop="start"
+    class="microphone microphone-rounded"
+  >
     <div class="microphone-inner microphone-rounded"></div>
   </div>
-  <div v-if="recording & !transciribing" @click.stop="stop" class="microphone">
+  <div v-if="recording && !transciribing" @click.stop="stop" class="microphone">
     <div class="microphone-inner"></div>
   </div>
   <p v-if="transcription">{{ transcription }}</p>
