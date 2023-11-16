@@ -1,5 +1,5 @@
-// @ts-ignore
 import { CommandsLanguages } from '@/stores/settings';
+// @ts-ignore
 import Artyom from 'artyom.js';
 
 const artyom = new Artyom()
