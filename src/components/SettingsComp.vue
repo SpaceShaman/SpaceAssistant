@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SettingsStore, Voices } from '@/stores/settings'
+import { Models, SettingsStore, Voices } from '@/stores/settings'
 import * as bootstrap from 'bootstrap'
 import { onMounted } from 'vue'
 
@@ -79,6 +79,19 @@ function save() {
                 :selected="voice === store.voice"
               >
                 {{ voice }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="model" class="col-form-label">Model:</label>
+            <select class="form-select" id="model" v-model="store.model">
+              <option
+                v-for="model in Models"
+                :value="model"
+                :key="model"
+                :selected="model === store.model"
+              >
+                {{ model }}
               </option>
             </select>
           </div>

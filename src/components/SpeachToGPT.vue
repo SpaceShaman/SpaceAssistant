@@ -54,7 +54,7 @@ const stop = async () => {
   recording.value = false
   transciribing.value = true
   transcription.value = await speachToText(audio, openai.value)
-  textFromGPT.value = await generateText(transcription.value, openai.value)
+  textFromGPT.value = await generateText(transcription.value, openai.value, store.model)
   await textToSpeach(textFromGPT.value, openai.value, store.voice)
   transciribing.value = false
 }

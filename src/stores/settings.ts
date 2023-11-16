@@ -16,19 +16,29 @@ enum Voices {
   shimmer = 'shimmer',
 }
 
+enum Models {
+  gpt3trubo = 'gpt-3.5-turbo',
+  gpt3turbo16k = 'gpt-3.5-turbo-16k',
+  gpt4 = 'gpt-4',
+}
+
+
 const SettingsStore = defineStore('settings', () => {
   const openaiApiKey = ref<string>('')
   const theme = ref<Themes>(Themes.dark)
   const voice = ref<Voices>(Voices.alloy)
+  const model = ref<Models>(Models.gpt3trubo)
 
   function save() {
     VueCookieNext.setCookie('openaiApiKey', openaiApiKey.value)
     VueCookieNext.setCookie('voice', voice.value)
+    VueCookieNext.setCookie('model', model.value)
   }
 
   function load() {
     openaiApiKey.value = VueCookieNext.getCookie('openaiApiKey') || ''
     voice.value = VueCookieNext.getCookie('voice') || Voices.alloy
+    model.value = VueCookieNext.getCookie('model') || Models.gpt3trubo
   }
 
   function loadTheme() {
@@ -47,7 +57,7 @@ const SettingsStore = defineStore('settings', () => {
     VueCookieNext.setCookie('theme', theme.value)
   }
 
-  return { openaiApiKey, theme, voice, save, load, loadTheme, toggleTheme }
+  return { openaiApiKey, theme, voice, model, save, load, loadTheme, toggleTheme }
 })
 
-export { SettingsStore, Voices };
+export { Models, SettingsStore, Voices };
