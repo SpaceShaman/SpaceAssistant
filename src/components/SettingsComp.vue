@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Models, SettingsStore, Voices } from '@/stores/settings'
+import { CommandsLanguages, Models, SettingsStore, Voices } from '@/stores/settings'
 import * as bootstrap from 'bootstrap'
 import { onMounted } from 'vue'
 
@@ -60,17 +60,18 @@ function save() {
           ></button>
         </div>
         <div class="modal-body">
-          <div class="mb-3">
-            <label for="openai-api-key" class="col-form-label">OpenAI Api Key:</label>
+          <div class="form-floating mb-3">
             <input
               type="text"
               class="form-control"
               id="openai-api-key"
               v-model="store.openaiApiKey"
+              placeholder="OpenAI Api Key"
             />
+            <label for="openai-api-key">OpenAI Api Key</label>
           </div>
-          <div class="mb-3">
-            <label for="voice" class="col-form-label">Voice:</label>
+
+          <div class="form-floating mb-3">
             <select class="form-select" id="voice" v-model="store.voice">
               <option
                 v-for="voice in Voices"
@@ -81,9 +82,10 @@ function save() {
                 {{ voice }}
               </option>
             </select>
+            <label for="voice" class="col-form-label">Voice</label>
           </div>
-          <div class="mb-3">
-            <label for="model" class="col-form-label">Model:</label>
+
+          <div class="form-floating mb-3">
             <select class="form-select" id="model" v-model="store.model">
               <option
                 v-for="model in Models"
@@ -94,6 +96,43 @@ function save() {
                 {{ model }}
               </option>
             </select>
+            <label for="model" class="col-form-label">Model:</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="start-command"
+              v-model="store.startCommand"
+              placeholder="Command to start recording"
+            />
+            <label for="start-command">Command to start recording</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="stop-command"
+              v-model="store.stopCommand"
+              placeholder="Command to stop recording"
+            />
+            <label for="stop-command">Command to stop recording</label>
+          </div>
+
+          <div class="form-floating mb-3">
+            <select class="form-select" id="commandsLanguage" v-model="store.commandsLanguage">
+              <option
+                v-for="language in CommandsLanguages"
+                :value="language"
+                :key="language"
+                :selected="language === store.commandsLanguage"
+              >
+                {{ language }}
+              </option>
+            </select>
+            <label for="commandsLanguage" class="col-form-label">Commands Language</label>
           </div>
         </div>
         <div class="modal-footer">

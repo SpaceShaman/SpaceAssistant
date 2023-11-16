@@ -22,15 +22,15 @@ onMounted(() => {
 
   const commands = [
     {
-      indexes: ['komputer', 'computer'],
+      indexes: [store.startCommand],
       action: start
     },
     {
-      indexes: ['stop', 'zatrzymaj', 'koniec', 'wystarczy'],
+      indexes: [store.stopCommand],
       action: stop
     }
   ]
-  commandRecognition(commands)
+  commandRecognition(commands, store.commandsLanguage)
 })
 
 const recorder = new AudioRecorder()

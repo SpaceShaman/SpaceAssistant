@@ -22,23 +22,49 @@ enum Models {
   gpt4 = 'gpt-4',
 }
 
+enum CommandsLanguages {
+  englishUS = 'en-US',
+  englishGB = 'en-GB',
+  spanish = 'es-ES',
+  german = 'de-DE',
+  italian = 'it-IT',
+  french = 'fr-FR',
+  japanese = 'ja-JP',
+  russian = 'ru-RU',
+  brazil = 'pt-PT',
+  polish = 'pl-PL',
+  indonesian = 'id-ID',
+  dutch = 'nl-NL',
+  chineseCantonese = 'zh-HK',
+  chineseMandarin = 'zh-CN',
+  hindi = 'hi-IN',
+}
 
 const SettingsStore = defineStore('settings', () => {
   const openaiApiKey = ref<string>('')
   const theme = ref<Themes>(Themes.dark)
   const voice = ref<Voices>(Voices.alloy)
   const model = ref<Models>(Models.gpt3trubo)
+  const startCommand = ref<string>('computer')
+  const stopCommand = ref<string>('stop')
+  const commandsLanguage = ref<CommandsLanguages>(CommandsLanguages.englishUS)
 
   function save() {
     VueCookieNext.setCookie('openaiApiKey', openaiApiKey.value)
     VueCookieNext.setCookie('voice', voice.value)
     VueCookieNext.setCookie('model', model.value)
+    VueCookieNext.setCookie('startCommands', startCommand.value)
+    VueCookieNext.setCookie('stopCommands', stopCommand.value)
+    VueCookieNext.setCookie('commandsLanguage', commandsLanguage.value)
   }
 
   function load() {
     openaiApiKey.value = VueCookieNext.getCookie('openaiApiKey') || ''
     voice.value = VueCookieNext.getCookie('voice') || Voices.alloy
     model.value = VueCookieNext.getCookie('model') || Models.gpt3trubo
+    startCommand.value = VueCookieNext.getCookie('startCommands') || 'computer'
+    stopCommand.value = VueCookieNext.getCookie('stopCommands') || 'stop'
+    commandsLanguage.value = VueCookieNext.getCookie('commandsLanguage') || CommandsLanguages.englishUS
   }
 
   function loadTheme() {
@@ -57,7 +83,7 @@ const SettingsStore = defineStore('settings', () => {
     VueCookieNext.setCookie('theme', theme.value)
   }
 
-  return { openaiApiKey, theme, voice, model, save, load, loadTheme, toggleTheme }
+  return { openaiApiKey, theme, voice, model, startCommand, stopCommand, commandsLanguage, save, load, loadTheme, toggleTheme }
 })
 
-export { Models, SettingsStore, Voices };
+export { CommandsLanguages, Models, SettingsStore, Voices };
