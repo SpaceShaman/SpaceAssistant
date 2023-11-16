@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SettingsStore } from '@/stores/settings'
+import { SettingsStore, Voices } from '@/stores/settings'
 import * as bootstrap from 'bootstrap'
 import { onMounted } from 'vue'
 
@@ -60,17 +60,28 @@ function save() {
           ></button>
         </div>
         <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="openai-api-key" class="col-form-label">OpenAI Api Key:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="openai-api-key"
-                v-model="store.openaiApiKey"
-              />
-            </div>
-          </form>
+          <div class="mb-3">
+            <label for="openai-api-key" class="col-form-label">OpenAI Api Key:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="openai-api-key"
+              v-model="store.openaiApiKey"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="voice" class="col-form-label">Voice:</label>
+            <select class="form-select" id="voice" v-model="store.voice">
+              <option
+                v-for="voice in Voices"
+                :value="voice"
+                :key="voice"
+                :selected="voice === store.voice"
+              >
+                {{ voice }}
+              </option>
+            </select>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

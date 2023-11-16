@@ -5,8 +5,8 @@ import OpenAI from 'openai'
 import { onMounted, ref } from 'vue'
 import AudioRecorder from '../utils/audioRecorder'
 import generateText from '../utils/generateText'
+import speachToText from '../utils/speachToText'
 import textToSpeach from '../utils/textToSpeach'
-import transcribeAudio from '../utils/transcribeAudio'
 
 const store = SettingsStore()
 
@@ -53,9 +53,9 @@ const stop = async () => {
   const audio: File = await recorder.stopRecording()
   recording.value = false
   transciribing.value = true
-  transcription.value = await transcribeAudio(audio, openai.value)
+  transcription.value = await speachToText(audio, openai.value)
   textFromGPT.value = await generateText(transcription.value, openai.value)
-  await textToSpeach(textFromGPT.value, openai.value)
+  await textToSpeach(textFromGPT.value, openai.value, store.voice)
   transciribing.value = false
 }
 </script>
