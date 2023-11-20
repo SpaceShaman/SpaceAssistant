@@ -23,6 +23,9 @@ You cen check it out [here](https://spaceshaman.github.io/space-assistant/)
 - [x] Command recognition and execution for start and stop listening
 - [x] Settings
 - [x] Dark mode and light mode switch
+- [ ] Command recognition and execution for settings
+- [ ] Markdown support for text generation
+- [ ] Code support for text generation
 - [ ] Plugins module
 - [ ] Spotify plugin
 - [ ] DALL·E plugin
