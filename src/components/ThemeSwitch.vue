@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SettingsStore } from '@/stores/settings'
+import { SettingsStore, Themes } from '@/stores/settings'
 import { onMounted } from 'vue'
 
 const store = SettingsStore()
@@ -12,7 +12,7 @@ onMounted(() => {
 <template>
   <input
     @click.stop="store.toggleTheme"
-    :class="{ dark: store.theme === 'dark' }"
+    :class="{ dark: store.theme === Themes.dark }"
     class="toggle"
     type="checkbox"
   />
@@ -46,7 +46,9 @@ onMounted(() => {
   --offset-diagonal: calc(var(--size) * 0.45);
 
   transform: scale(0.75);
-  box-shadow: inset 0 0 0 var(--size), calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size),
+  box-shadow:
+    inset 0 0 0 var(--size),
+    calc(var(--offset-orthogonal) * -1) 0 0 var(--ray-size),
     var(--offset-orthogonal) 0 0 var(--ray-size),
     0 calc(var(--offset-orthogonal) * -1) 0 var(--ray-size),
     0 var(--offset-orthogonal) 0 var(--ray-size),

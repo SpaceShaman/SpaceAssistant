@@ -15,9 +15,18 @@ You cen check it out [here](https://spaceshaman.github.io/space-assistant/)
 - [SVG Repo](https://www.svgrepo.com/)
 - [Dark mode switch](https://codepen.io/mrozilla/pen/OJJNjRb)
 
-## Roadmap
+## Features and roadmap
 
-You can find the roadmap [here](https://github.com/users/SpaceShaman/projects/3)
+- [x] Speech-to-text via OpenAI API Wisper
+- [x] Text generation via OpenAI API GPT-3 or GPT-4
+- [x] Text-to-speech via OpenAI API Wisper
+- [x] Command recognition and execution for start and stop listening
+- [x] Settings
+- [x] Dark mode and light mode switch
+- [] Plugins module
+- [] Spotify plugin
+- [] DALL·E plugin
+- [] Weather plugin
 
 ## Project Setup
 

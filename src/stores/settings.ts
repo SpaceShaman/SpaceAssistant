@@ -68,12 +68,12 @@ const SettingsStore = defineStore('settings', () => {
   }
 
   function loadTheme() {
-    theme.value = VueCookieNext.getCookie('theme') || 'dark'
+    theme.value = VueCookieNext.getCookie('theme') || Themes.dark
     document.documentElement.setAttribute('data-bs-theme', theme.value)
   }
 
   function toggleTheme() {
-    if (theme.value === 'dark') {
+    if (theme.value === Themes.dark) {
       theme.value = Themes.light
     } else {
       theme.value = Themes.dark
@@ -86,4 +86,4 @@ const SettingsStore = defineStore('settings', () => {
   return { openaiApiKey, theme, voice, model, startCommand, stopCommand, commandsLanguage, save, load, loadTheme, toggleTheme }
 })
 
-export { CommandsLanguages, Models, SettingsStore, Voices };
+export { CommandsLanguages, Models, SettingsStore, Themes, Voices };
