@@ -1,4 +1,7 @@
-# Space Assistant
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="logo/logo-dark.png">
+  <img src="logo/logo-light.png">
+</picture>
 
 Voice assistant built with [Vue.js](https://vuejs.org/) and [OpenAI API](https://platform.openai.com/docs/).
 It works according to the following scheme: Audio from microphone -> StT -> GPT4 -> TtS
