@@ -20,9 +20,9 @@ You cen check it out [here](https://spaceshaman.github.io/space-assistant/)
 
 ## Features and roadmap
 
-- [x] Speech-to-text via OpenAI API Wisper
+- [x] Speech-to-text via OpenAI API Whisper
 - [x] Text generation via OpenAI API GPT-3 or GPT-4
-- [x] Text-to-speech via OpenAI API Wisper
+- [x] Text-to-speech via OpenAI API Whisper
 - [x] Command recognition and execution for start and stop listening
 - [x] Settings
 - [x] Dark mode and light mode switch
