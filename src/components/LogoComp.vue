@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import SpeachToGPT from '@/components/SpeachToGPT.vue'
-</script>
-
 <template>
   <h1>
     <!-- https://www.svgrepo.com/svg/440470/astronaut-helmet -->
@@ -13,7 +9,6 @@ import SpeachToGPT from '@/components/SpeachToGPT.vue'
     Space Assistant
   </h1>
   <p>Click button below and say something...</p>
-  <SpeachToGPT />
 </template>
 
 <style scoped>
