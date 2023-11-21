@@ -22,7 +22,7 @@ enum Models {
   gpt4 = 'gpt-4',
 }
 
-enum CommandsLanguages {
+enum Languages {
   englishUS = 'en-US',
   englishGB = 'en-GB',
   spanish = 'es-ES',
@@ -47,7 +47,7 @@ const SettingsStore = defineStore('settings', () => {
   const model = ref<Models>(Models.gpt3trubo)
   const startCommand = ref<string>('computer')
   const stopCommand = ref<string>('stop')
-  const commandsLanguage = ref<CommandsLanguages>(CommandsLanguages.englishUS)
+  const lang = ref<Languages>(Languages.englishUS)
 
   function save() {
     VueCookieNext.setCookie('openaiApiKey', openaiApiKey.value)
@@ -55,7 +55,7 @@ const SettingsStore = defineStore('settings', () => {
     VueCookieNext.setCookie('model', model.value)
     VueCookieNext.setCookie('startCommands', startCommand.value)
     VueCookieNext.setCookie('stopCommands', stopCommand.value)
-    VueCookieNext.setCookie('commandsLanguage', commandsLanguage.value)
+    VueCookieNext.setCookie('lang', lang.value)
   }
 
   function load() {
@@ -64,7 +64,7 @@ const SettingsStore = defineStore('settings', () => {
     model.value = VueCookieNext.getCookie('model') || Models.gpt3trubo
     startCommand.value = VueCookieNext.getCookie('startCommands') || 'computer'
     stopCommand.value = VueCookieNext.getCookie('stopCommands') || 'stop'
-    commandsLanguage.value = VueCookieNext.getCookie('commandsLanguage') || CommandsLanguages.englishUS
+    lang.value = VueCookieNext.getCookie('lang') || Languages.englishUS
   }
 
   function loadTheme() {
@@ -83,7 +83,7 @@ const SettingsStore = defineStore('settings', () => {
     VueCookieNext.setCookie('theme', theme.value)
   }
 
-  return { openaiApiKey, theme, voice, model, startCommand, stopCommand, commandsLanguage, save, load, loadTheme, toggleTheme }
+  return { openaiApiKey, theme, voice, model, startCommand, stopCommand, lang, save, load, loadTheme, toggleTheme }
 })
 
-export { CommandsLanguages, Models, SettingsStore, Themes, Voices };
+export { Languages, Models, SettingsStore, Themes, Voices };

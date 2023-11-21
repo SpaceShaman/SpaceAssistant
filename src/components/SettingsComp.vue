@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CommandsLanguages, Models, SettingsStore, Voices } from '@/stores/settings'
+import { Languages, Models, SettingsStore, Voices } from '@/stores/settings'
 import * as bootstrap from 'bootstrap'
 import { onMounted } from 'vue'
 
@@ -122,17 +122,17 @@ function save() {
           </div>
 
           <div class="form-floating mb-3">
-            <select class="form-select" id="commandsLanguage" v-model="store.commandsLanguage">
+            <select class="form-select" id="lang" v-model="store.lang">
               <option
-                v-for="language in CommandsLanguages"
+                v-for="language in Languages"
                 :value="language"
                 :key="language"
-                :selected="language === store.commandsLanguage"
+                :selected="language === store.lang"
               >
                 {{ language }}
               </option>
             </select>
-            <label for="commandsLanguage" class="col-form-label">Commands Language</label>
+            <label for="lang" class="col-form-label">Commands Language</label>
           </div>
         </div>
         <div class="modal-footer">

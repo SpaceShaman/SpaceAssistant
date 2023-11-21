@@ -8,15 +8,11 @@
     </svg>
     Space Assistant
   </h1>
-  <p>Click button below and say something...</p>
 </template>
 
 <style scoped>
 h1 {
   margin-bottom: -0.1rem;
-}
-p {
-  margin-bottom: 0;
 }
 .logo {
   --size: 4.5rem;

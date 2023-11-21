@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import LogoComp from './components/LogoComp.vue'
 import SettingsComp from './components/SettingsComp.vue'
-import SpeachToGPT from './components/SpeachToGPT.vue'
-import ThemeSwitch from './components/ThemeSwitch.vue'
+import ThemeSwitcher from './components/ThemeSwitcher.vue'
+import VoiceAssistant from './components/VoiceAssistant.vue'
 </script>
 
 <template>
-  <LogoComp />
-  <SpeachToGPT />
   <SettingsComp />
-  <ThemeSwitch />
+  <LogoComp />
+  <VoiceAssistant />
+  <ThemeSwitcher />
 </template>
 
 <style>
