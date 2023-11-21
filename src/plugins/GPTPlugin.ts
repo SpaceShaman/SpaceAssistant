@@ -1,22 +1,25 @@
-import { SettingsStore } from '@/stores/settings';
-import generateText from '@/utils/generateText';
-import textToSpeach from '@/utils/textToSpeach';
-import type { CommandOption } from 'annyang';
 import OpenAI from 'openai';
+import { SettingsStore } from '../stores/settings';
+import generateText from '../utils/generateText';
+import textToSpeach from '../utils/textToSpeach';
+import type Plugin from './pluginType';
 
-export default class {
-    settings = SettingsStore();
-    output: string = '';
-    openai = new OpenAI({ apiKey: this.settings.openaiApiKey, dangerouslyAllowBrowser: true })
 
-    askGPT = async (question: string) => {
-        const openai = new OpenAI({ apiKey: this.settings.openaiApiKey, dangerouslyAllowBrowser: true })
-    
-        this.output = await generateText(question, openai, this.settings.model);
-        await textToSpeach(this.output, openai, this.settings.voice);
-    }
+const askGPT = async (question: string) => {
+    const settings = SettingsStore()
+    const openai = new OpenAI({ apiKey: settings.openaiApiKey, dangerouslyAllowBrowser: true })
 
-    commands: CommandOption = {
-        'powiedz mi *tag': this.askGPT as any,
+    GPTPlugin.output = await generateText(question, openai, settings.model);
+    await textToSpeach(GPTPlugin.output, openai, settings.voice);
+}
+
+
+const GPTPlugin: Plugin = {
+    output: '',
+    commands: {
+        'tell me *tag': askGPT as any,
     }
 }
+
+
+export default GPTPlugin;

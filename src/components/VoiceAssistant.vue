@@ -3,12 +3,10 @@ import GPTPlugin from '@/plugins/GPTPlugin'
 import commandRecogizer from '@/utils/commandRecogizer'
 import { onMounted, ref } from 'vue'
 
-const GPT = new GPTPlugin()
-
 const userInput = ref<string>('')
 
 onMounted(() => {
-  const recogizer = commandRecogizer(GPT.commands)
+  const recogizer = commandRecogizer(GPTPlugin.commands)
   recogizer.addCallback('result', (userSaid) => {
     if (userSaid) userInput.value = userSaid[0]
   })
@@ -17,7 +15,7 @@ onMounted(() => {
 
 <template>
   <div id="user-input">{{ userInput }}</div>
-  <div id="plugins">{{ GPT.output }}</div>
+  <div id="plugins">{{ GPTPlugin.output }}</div>
 </template>
 
 <style scoped></style>
