@@ -4,7 +4,7 @@ import { Models } from '../stores/settings'
 export default async (promt: string, openai: OpenAI, model:Models = Models.gpt3trubo): Promise<string> => {
   const response = await openai.chat.completions.create({
     messages: [
-      { role: 'system', content: 'You are a helpful assistant. You answer questions briefly and concisely, unless you are asked to provide more detailed information' },
+      { role: 'system', content: 'You are a helpful assistant. You answer shortly and precise unless asked for a long answer.' },
       { role: 'user', content: promt }
     ],
     model: model,
