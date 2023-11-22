@@ -80,6 +80,7 @@ You cen check it out [here](https://spaceshaman.github.io/assistant/)
     ``` vue
     <script setup lang="ts">
     import GPTPlugin from '@/plugins/GPTPlugin.vue'
+    import YourPlugin from '@/plugins/YourPlugin.vue'
     ...
     </script>
     <template>
