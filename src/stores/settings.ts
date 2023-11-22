@@ -75,7 +75,7 @@ const SettingsStore = defineStore('settings', () => {
     toggleThemeCommand.value = VueCookieNext.getCookie('toggleThemeCommand') || 'change theme'
     theme.value = VueCookieNext.getCookie('theme') || Themes.dark
   }
-
+  
   const menu: Menu[] = [
     { 
       key: 'openaiApiKey',
@@ -116,7 +116,7 @@ const SettingsStore = defineStore('settings', () => {
       label: 'Theme',
       options: Object.values(Themes),
     }
-  ]
+  ] // Menu items used in settings component to render settings form
 
   return { 
     openaiApiKey, 
