@@ -18,8 +18,9 @@ export default defineStore('plugins', () => {
             }
         })
         recogizer.setLanguage(lang)
-        recogizer.start();
-        return recogizer;
+        recogizer.debug()
+        recogizer.start()
+        return recogizer
     }
 
     return { userInput ,output, recogizer, setup }

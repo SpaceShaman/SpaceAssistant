@@ -21,14 +21,12 @@ function toggleTheme() {
   store.save()
 }
 
-const commands: CommandOption = {
-  [store.toggleThemeCommand]: toggleTheme as any
-}
-
-recogizer.addCommands(commands)
-
 onMounted(() => {
   document.documentElement.setAttribute('data-bs-theme', store.theme)
+  const commands: CommandOption = {
+    [store.toggleThemeCommand]: toggleTheme as any
+  }
+  recogizer.addCommands(commands)
 })
 </script>
 

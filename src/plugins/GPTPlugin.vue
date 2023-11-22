@@ -6,23 +6,27 @@ import textToSpeach from '../utils/textToSpeach'
 import commandRecogizer from '../stores/commandRecogizer'
 import type { CommandOption } from 'annyang'
 import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
 
 const { output } = storeToRefs(commandRecogizer())
 const { recogizer } = commandRecogizer()
-const { openaiApiKey, model, voice, startCommand } = SettingsStore()
+const { openaiApiKey, model, voice, startCommand } = storeToRefs(SettingsStore())
 
 const askGPT = async (question: string) => {
   recogizer.pause()
-  const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true })
-  output.value = await generateText(question, openai, model)
-  await textToSpeach(output.value, openai, voice)
+  const openai = new OpenAI({ apiKey: openaiApiKey.value, dangerouslyAllowBrowser: true })
+  output.value = await generateText(question, openai, model.value)
+  await textToSpeach(output.value, openai, voice.value)
   recogizer.resume()
 }
 
-const commands: CommandOption = {
-  [`${startCommand} *question`]: askGPT as any
-}
-
-recogizer.addCommands(commands)
+onMounted(() => {
+  const commands: CommandOption = {
+    [`${startCommand.value} *question`]: askGPT as any
+  }
+  recogizer.addCommands(commands)
+})
 </script>
-<template><div /></template>
+<template>
+  <div />
+</template>
