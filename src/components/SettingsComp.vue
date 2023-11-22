@@ -7,16 +7,11 @@ const store = SettingsStore()
 
 onMounted(() => {
   store.load()
+  const settingsModal = new bootstrap.Modal('#settingsModal')
   if (store.openaiApiKey === '' || store.openaiApiKey === null) {
-    const settingsModal = new bootstrap.Modal('#settingsModal')
     settingsModal.show()
   }
 })
-
-function save() {
-  store.save()
-  window.location.reload()
-}
 </script>
 
 <template>
@@ -137,7 +132,9 @@ function save() {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" @click="save">Save</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" @click="store.save">
+            Save
+          </button>
         </div>
       </div>
     </div>

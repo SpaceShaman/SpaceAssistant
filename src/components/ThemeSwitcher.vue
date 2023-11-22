@@ -4,14 +4,24 @@ import { onMounted } from 'vue'
 
 const store = SettingsStore()
 
+function toggleTheme() {
+  if (store.theme === Themes.dark) {
+    store.theme = Themes.light
+  } else {
+    store.theme = Themes.dark
+  }
+  document.documentElement.setAttribute('data-bs-theme', store.theme)
+  store.save()
+}
+
 onMounted(() => {
-  store.loadTheme()
+  document.documentElement.setAttribute('data-bs-theme', store.theme)
 })
 </script>
 
 <template>
   <input
-    @click.stop="store.toggleTheme"
+    @click.stop="toggleTheme"
     :class="{ dark: store.theme === Themes.dark }"
     class="toggle"
     type="checkbox"

@@ -56,6 +56,7 @@ const SettingsStore = defineStore('settings', () => {
     VueCookieNext.setCookie('startCommands', startCommand.value)
     VueCookieNext.setCookie('stopCommands', stopCommand.value)
     VueCookieNext.setCookie('lang', lang.value)
+    VueCookieNext.setCookie('theme', theme.value)
   }
 
   function load() {
@@ -65,25 +66,10 @@ const SettingsStore = defineStore('settings', () => {
     startCommand.value = VueCookieNext.getCookie('startCommands') || 'computer'
     stopCommand.value = VueCookieNext.getCookie('stopCommands') || 'stop'
     lang.value = VueCookieNext.getCookie('lang') || Languages.englishUS
-  }
-
-  function loadTheme() {
     theme.value = VueCookieNext.getCookie('theme') || Themes.dark
-    document.documentElement.setAttribute('data-bs-theme', theme.value)
   }
 
-  function toggleTheme() {
-    if (theme.value === Themes.dark) {
-      theme.value = Themes.light
-    } else {
-      theme.value = Themes.dark
-    }
-    document.documentElement.setAttribute('data-bs-theme', theme.value)
-
-    VueCookieNext.setCookie('theme', theme.value)
-  }
-
-  return { openaiApiKey, theme, voice, model, startCommand, stopCommand, lang, save, load, loadTheme, toggleTheme }
+  return { openaiApiKey, theme, voice, model, startCommand, stopCommand, lang, save, load }
 })
 
 export { Languages, Models, SettingsStore, Themes, Voices };
