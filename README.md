@@ -78,14 +78,16 @@ You cen check it out [here](https://spaceshaman.github.io/assistant/)
 3. Import this plugin in App.vue file and add it to template
 
     ``` vue
+    <script setup lang="ts">
+    import GPTPlugin from '@/plugins/GPTPlugin.vue'
+    ...
+    </script>
     <template>
-      <LogoComp />
-      <SettingsComp />
-      <ThemeSwitcher />
+      ...
       <div id="plugins">
         <GPTPlugin />
         <YourPlugin />
-        ...
+      </div>
     </template>
     ```
 
