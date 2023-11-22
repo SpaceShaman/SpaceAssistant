@@ -5,7 +5,7 @@
 
 Voice assistant built with [Vue.js](https://vuejs.org/). Easily to hack and extend.
 It use VoiceRecognition API vie [annyang](https://github.com/TalAter/annyang) library to recognize commands and [OpenAI API](https://platform.openai.com/docs/) to generate text and speech.
-All functionalities are built as plugins, so you can easily expand this application yourself
+All functionalities are built as plugins, so you can easily expand this application by yourself.
 
 You cen check it out [here](https://spaceshaman.github.io/assistant/)
 
@@ -35,6 +35,59 @@ You cen check it out [here](https://spaceshaman.github.io/assistant/)
 - [ ] Spotify plugin
 - [ ] DALL·E plugin
 - [ ] Weather plugin
+
+## How to create plugin
+
+1. Create new file in `src/plugins` directory with name `PluginNamePlugin.vue`
+2. Build your plugin as follows
+
+    ``` js
+    <script setup lang="ts">
+    import commandRecogizer from '../stores/commandRecogizer'
+    import type { CommandOption } from 'annyang'
+    import { storeToRefs } from 'pinia'
+
+    const { output } = storeToRefs(commandRecogizer())
+    const { recogizer } = commandRecogizer()
+
+    const yourPluginAction = (question: string) => {
+      recogizer.pause()
+        console.log(question)
+        output.value = 'Your plugin action'
+      recogizer.resume()
+    }
+
+    const anotherPluginAction = ()) => {
+      recogizer.pause()
+        console.log('Another plugin action')
+        output.value = 'Another plugin action'
+      recogizer.resume()
+    }
+
+    const commands: CommandOption = {
+      'tell me *question': yourPluginAction as any
+      'another plugin action': anotherPluginAction as any
+    }
+
+    recogizer.addCommands(commands)
+    </script>
+    ```
+
+    recpgozer is instance of [annyang](https://github.com/TalAter/annyang) if you want to know more about it, how commands works and how to write them, check out [annyang documentatio](https://github.com/TalAter/annyang/blob/master/docs/README.md).
+
+3. Import this plugin in App.vue file and add it to template
+
+    ``` js
+    <template>
+      <LogoComp />
+      <SettingsComp />
+      <ThemeSwitcher />
+      <div id="plugins">
+        <GPTPlugin />
+        <YourPlugin />
+        ...
+    </template>
+    ```
 
 ## Project Setup
 
