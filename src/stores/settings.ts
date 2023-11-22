@@ -40,36 +40,96 @@ enum Languages {
   hindi = 'hi-IN',
 }
 
+interface Menu {
+    key: string;
+    type: 'text' | 'select';
+    label: string;
+    options?: string[];
+  }
+
 const SettingsStore = defineStore('settings', () => {
   const openaiApiKey = ref<string>('')
-  const theme = ref<Themes>(Themes.dark)
+  const lang = ref<Languages>(Languages.englishUS)
   const voice = ref<Voices>(Voices.alloy)
   const model = ref<Models>(Models.gpt3trubo)
   const startCommand = ref<string>('computer')
   const toggleThemeCommand = ref<string>('change theme')
-  const lang = ref<Languages>(Languages.englishUS)
+  const theme = ref<Themes>(Themes.dark)
 
   function save() {
     VueCookieNext.setCookie('openaiApiKey', openaiApiKey.value)
+    VueCookieNext.setCookie('lang', lang.value)
     VueCookieNext.setCookie('voice', voice.value)
     VueCookieNext.setCookie('model', model.value)
     VueCookieNext.setCookie('startCommands', startCommand.value)
     VueCookieNext.setCookie('toggleThemeCommand', toggleThemeCommand.value)
-    VueCookieNext.setCookie('lang', lang.value)
     VueCookieNext.setCookie('theme', theme.value)
   }
 
   function load() {
     openaiApiKey.value = VueCookieNext.getCookie('openaiApiKey') || ''
+    lang.value = VueCookieNext.getCookie('lang') || Languages.englishUS
     voice.value = VueCookieNext.getCookie('voice') || Voices.alloy
     model.value = VueCookieNext.getCookie('model') || Models.gpt3trubo
     startCommand.value = VueCookieNext.getCookie('startCommands') || 'computer'
     toggleThemeCommand.value = VueCookieNext.getCookie('toggleThemeCommand') || 'change theme'
-    lang.value = VueCookieNext.getCookie('lang') || Languages.englishUS
     theme.value = VueCookieNext.getCookie('theme') || Themes.dark
   }
 
-  return { openaiApiKey, theme, voice, model, startCommand, toggleThemeCommand, lang, save, load }
+  const menu: Menu[] = [
+    { 
+      key: 'openaiApiKey',
+      type: 'text', 
+      label: 'OpenAI Api Key',
+    },
+    { 
+      key: 'lang',
+      type: 'select', 
+      label: 'Language',
+      options: Object.values(Languages),
+    },
+    { 
+      key: 'voice',
+      type: 'select', 
+      label: 'Voice',
+      options: Object.values(Voices),
+    },
+    { 
+      key: 'model',
+      type: 'select', 
+      label: 'Model',
+      options: Object.values(Models),
+    },
+    { 
+      key: 'startCommand',
+      type: 'text', 
+      label: 'Start Command',
+    },
+    { 
+      key: 'toggleThemeCommand',
+      type: 'text', 
+      label: 'Toggle Theme Command',
+    },
+    { 
+      key: 'theme',
+      type: 'select', 
+      label: 'Theme',
+      options: Object.values(Themes),
+    }
+  ]
+
+  return { 
+    openaiApiKey, 
+    theme, 
+    voice, 
+    model, 
+    startCommand, 
+    toggleThemeCommand, 
+    lang, 
+    save, 
+    load,
+    menu,
+  }
 })
 
 export { Languages, Models, SettingsStore, Themes, Voices };

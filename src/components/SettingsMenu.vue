@@ -1,27 +1,26 @@
 <script setup lang="ts">
-import { Languages, Models, SettingsStore, Voices } from '@/stores/settings'
+import { SettingsStore } from '@/stores/settings'
+import commandRecogizer from '@/stores/commandRecogizer'
 import * as bootstrap from 'bootstrap'
 import { onMounted } from 'vue'
-import commandRecogizer from '@/stores/commandRecogizer'
 
-const store = SettingsStore()
+const settings = SettingsStore()
 
 const { recogizer } = commandRecogizer()
 
 function save() {
-  store.save()
-  recogizer.setLanguage(store.lang)
+  settings.save()
+  recogizer.setLanguage(settings.lang)
 }
 
 onMounted(() => {
-  store.load()
+  settings.load()
   const settingsModal = new bootstrap.Modal('#settingsModal')
-  if (store.openaiApiKey === '' || store.openaiApiKey === null) {
+  if (settings.openaiApiKey === '' || settings.openaiApiKey === null) {
     settingsModal.show()
   }
 })
 </script>
-
 <template>
   <div class="settings-button" data-bs-toggle="modal" data-bs-target="#settingsModal">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +42,6 @@ onMounted(() => {
       ></path>
     </svg>
   </div>
-
   <div
     class="modal fade"
     id="settingsModal"
@@ -63,79 +61,31 @@ onMounted(() => {
           ></button>
         </div>
         <div class="modal-body">
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="openai-api-key"
-              v-model="store.openaiApiKey"
-              placeholder="OpenAI Api Key"
-            />
-            <label for="openai-api-key">OpenAI Api Key</label>
-          </div>
+          <div v-for="menu in settings.menu" :key="menu.key">
+            <div class="form-floating mb-3" v-if="menu.type === 'text'">
+              <input
+                :type="menu.type"
+                class="form-control"
+                :id="menu.key"
+                v-model="(settings as any)[menu.key]"
+                :placeholder="menu.label"
+              />
+              <label :for="menu.key">{{ menu.label }}</label>
+            </div>
 
-          <div class="form-floating mb-3">
-            <select class="form-select" id="lang" v-model="store.lang">
-              <option
-                v-for="language in Languages"
-                :value="language"
-                :key="language"
-                :selected="language === store.lang"
+            <div class="form-floating mb-3" v-else-if="menu.type === 'select'">
+              <select
+                class="form-select"
+                :id="menu.key"
+                v-model="(settings as any)[menu.key]"
+                :placeholder="menu.label"
               >
-                {{ language }}
-              </option>
-            </select>
-            <label for="lang" class="col-form-label">Commands Language</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <select class="form-select" id="voice" v-model="store.voice">
-              <option
-                v-for="voice in Voices"
-                :value="voice"
-                :key="voice"
-                :selected="voice === store.voice"
-              >
-                {{ voice }}
-              </option>
-            </select>
-            <label for="voice" class="col-form-label">Voice</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <select class="form-select" id="model" v-model="store.model">
-              <option
-                v-for="model in Models"
-                :value="model"
-                :key="model"
-                :selected="model === store.model"
-              >
-                {{ model }}
-              </option>
-            </select>
-            <label for="model" class="col-form-label">Model:</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="start-command"
-              v-model="store.startCommand"
-              placeholder="Command to start speach to GPT"
-            />
-            <label for="start-command">Command to start speach to GPT</label>
-          </div>
-
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="toggle-theme-command"
-              v-model="store.toggleThemeCommand"
-              placeholder="Command to toggle theme"
-            />
-            <label for="toggle-theme-command">Command to toggle theme</label>
+                <option v-for="option in (menu as any).options" :key="option" :value="option">
+                  {{ option }}
+                </option>
+              </select>
+              <label :for="menu.key">{{ menu.label }}</label>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -148,7 +98,6 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
 <style scoped>
 .settings-button {
   z-index: 1;

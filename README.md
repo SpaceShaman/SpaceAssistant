@@ -36,6 +36,7 @@ You cen check it out [here](https://spaceshaman.github.io/assistant/)
 - [ ] Spotify plugin
 - [ ] DALL·E plugin
 - [ ] Weather plugin
+- [ ] Mobile support
 
 ## How to create plugin
 

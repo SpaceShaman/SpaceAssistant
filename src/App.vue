@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import LogoComp from './components/LogoComp.vue'
-import SettingsComp from './components/SettingsComp.vue'
+import SettingsMenu from './components/SettingsMenu.vue'
 import ThemePlugin from './plugins/ThemePlugin.vue'
 import GPTPlugin from '@/plugins/GPTPlugin.vue'
 import commandRecogizer from '@/stores/commandRecogizer'
@@ -17,7 +17,7 @@ onMounted(() => {
 
 <template>
   <LogoComp />
-  <SettingsComp />
+  <SettingsMenu />
   <div id="plugins">
     <GPTPlugin />
     <ThemePlugin />
