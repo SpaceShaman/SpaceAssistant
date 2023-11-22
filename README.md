@@ -3,10 +3,11 @@
   <img src="logo/logo-light.png">
 </picture>
 
-Voice assistant built with [Vue.js](https://vuejs.org/) and [OpenAI API](https://platform.openai.com/docs/).
-It works according to the following scheme: Audio from microphone -> StT -> GPT4 -> TtS
+Voice assistant built with [Vue.js](https://vuejs.org/). Easily to hack and extend.
+It use VoiceRecognition API vie [annyang](https://github.com/TalAter/annyang) library to recognize commands and [OpenAI API](https://platform.openai.com/docs/) to generate text and speech.
+All functionalities are built as plugins, so you can easily expand this application yourself
 
-You cen check it out [here](https://spaceshaman.github.io/space-assistant/)
+You cen check it out [here](https://spaceshaman.github.io/assistant/)
 
 ## Dependencies
 
@@ -21,16 +22,16 @@ You cen check it out [here](https://spaceshaman.github.io/space-assistant/)
 
 ## Features and roadmap
 
-- [x] Speech-to-text via OpenAI API Whisper
-- [x] Text generation via OpenAI API GPT-3 or GPT-4
+- [x] Command recognition vie VoiceRecognition API
+- [x] Text generation via OpenAI API
 - [x] Text-to-speech via OpenAI API Whisper
-- [x] Command recognition and execution for start and stop listening
 - [x] Settings
 - [x] Dark mode and light mode switch
+- [x] Plugins module
+- [x] GPTPlugin for text generation
 - [ ] Command recognition and execution for settings
 - [ ] Markdown support for text generation
 - [ ] Code support for text generation
-- [ ] Plugins module
 - [ ] Spotify plugin
 - [ ] DALL·E plugin
 - [ ] Weather plugin

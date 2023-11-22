@@ -2,8 +2,16 @@
 import { Languages, Models, SettingsStore, Voices } from '@/stores/settings'
 import * as bootstrap from 'bootstrap'
 import { onMounted } from 'vue'
+import commandRecogizer from '@/stores/commandRecogizer'
 
 const store = SettingsStore()
+
+const { recogizer } = commandRecogizer()
+
+function save() {
+  store.save()
+  recogizer.setLanguage(store.lang)
+}
 
 onMounted(() => {
   store.load()
@@ -67,6 +75,20 @@ onMounted(() => {
           </div>
 
           <div class="form-floating mb-3">
+            <select class="form-select" id="lang" v-model="store.lang">
+              <option
+                v-for="language in Languages"
+                :value="language"
+                :key="language"
+                :selected="language === store.lang"
+              >
+                {{ language }}
+              </option>
+            </select>
+            <label for="lang" class="col-form-label">Commands Language</label>
+          </div>
+
+          <div class="form-floating mb-3">
             <select class="form-select" id="voice" v-model="store.voice">
               <option
                 v-for="voice in Voices"
@@ -115,24 +137,10 @@ onMounted(() => {
             />
             <label for="stop-command">Command to stop recording</label>
           </div>
-
-          <div class="form-floating mb-3">
-            <select class="form-select" id="lang" v-model="store.lang">
-              <option
-                v-for="language in Languages"
-                :value="language"
-                :key="language"
-                :selected="language === store.lang"
-              >
-                {{ language }}
-              </option>
-            </select>
-            <label for="lang" class="col-form-label">Commands Language</label>
-          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" @click="store.save">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" @click="save">
             Save
           </button>
         </div>
