@@ -2,7 +2,7 @@
 import { onMounted } from 'vue'
 import LogoComp from './components/LogoComp.vue'
 import SettingsComp from './components/SettingsComp.vue'
-import ThemeSwitcher from './components/ThemeSwitcher.vue'
+import ThemePlugin from './plugins/ThemePlugin.vue'
 import GPTPlugin from '@/plugins/GPTPlugin.vue'
 import commandRecogizer from '@/stores/commandRecogizer'
 import { storeToRefs } from 'pinia'
@@ -18,9 +18,9 @@ onMounted(() => {
 <template>
   <LogoComp />
   <SettingsComp />
-  <ThemeSwitcher />
   <div id="plugins">
     <GPTPlugin />
+    <ThemePlugin />
   </div>
   <p id="user-input">
     {{ userInput }}

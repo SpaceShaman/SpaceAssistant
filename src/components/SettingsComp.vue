@@ -122,20 +122,20 @@ onMounted(() => {
               class="form-control"
               id="start-command"
               v-model="store.startCommand"
-              placeholder="Command to start recording"
+              placeholder="Command to start speach to GPT"
             />
-            <label for="start-command">Command to start recording</label>
+            <label for="start-command">Command to start speach to GPT</label>
           </div>
 
           <div class="form-floating mb-3">
             <input
               type="text"
               class="form-control"
-              id="stop-command"
-              v-model="store.stopCommand"
-              placeholder="Command to stop recording"
+              id="toggle-theme-command"
+              v-model="store.toggleThemeCommand"
+              placeholder="Command to toggle theme"
             />
-            <label for="stop-command">Command to stop recording</label>
+            <label for="toggle-theme-command">Command to toggle theme</label>
           </div>
         </div>
         <div class="modal-footer">

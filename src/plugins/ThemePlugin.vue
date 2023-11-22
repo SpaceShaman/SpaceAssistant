@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { SettingsStore, Themes } from '@/stores/settings'
 import { onMounted } from 'vue'
+import commandRecogizer from '../stores/commandRecogizer'
+import type { CommandOption } from 'annyang'
+import { storeToRefs } from 'pinia'
+
+const { output } = storeToRefs(commandRecogizer())
+const { recogizer } = commandRecogizer()
 
 const store = SettingsStore()
 
@@ -11,8 +17,15 @@ function toggleTheme() {
     store.theme = Themes.dark
   }
   document.documentElement.setAttribute('data-bs-theme', store.theme)
+  output.value = `Switched to ${store.theme} theme`
   store.save()
 }
+
+const commands: CommandOption = {
+  [store.toggleThemeCommand]: toggleTheme as any
+}
+
+recogizer.addCommands(commands)
 
 onMounted(() => {
   document.documentElement.setAttribute('data-bs-theme', store.theme)

@@ -6,6 +6,7 @@
 Voice assistant built with [Vue.js](https://vuejs.org/). Easily to hack and extend.
 It use VoiceRecognition API vie [annyang](https://github.com/TalAter/annyang) library to recognize commands and [OpenAI API](https://platform.openai.com/docs/) to generate text and speech.
 All functionalities are built as plugins, so you can easily expand this application by yourself.
+Because this application use VoiceRecognition API, it works only in browsers that support it like Chrome (firefox doesn't support it).
 
 You cen check it out [here](https://spaceshaman.github.io/assistant/)
 
@@ -29,6 +30,7 @@ You cen check it out [here](https://spaceshaman.github.io/assistant/)
 - [x] Dark mode and light mode switch
 - [x] Plugins module
 - [x] GPTPlugin for text generation
+- [x] ThemePlugin for dark mode and light mode switch
 - [ ] Command recognition and execution for settings
 - [ ] Markdown support for text generation
 - [ ] Code support for text generation

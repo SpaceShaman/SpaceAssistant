@@ -9,10 +9,10 @@ import { storeToRefs } from 'pinia'
 
 const { output } = storeToRefs(commandRecogizer())
 const { recogizer } = commandRecogizer()
+const { openaiApiKey, model, voice, startCommand } = SettingsStore()
 
 const askGPT = async (question: string) => {
   recogizer.pause()
-  const { openaiApiKey, model, voice } = SettingsStore()
   const openai = new OpenAI({ apiKey: openaiApiKey, dangerouslyAllowBrowser: true })
   output.value = await generateText(question, openai, model)
   await textToSpeach(output.value, openai, voice)
@@ -20,7 +20,7 @@ const askGPT = async (question: string) => {
 }
 
 const commands: CommandOption = {
-  'tell me *tag': askGPT as any
+  [`${startCommand} *question`]: askGPT as any
 }
 
 recogizer.addCommands(commands)

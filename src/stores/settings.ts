@@ -46,7 +46,7 @@ const SettingsStore = defineStore('settings', () => {
   const voice = ref<Voices>(Voices.alloy)
   const model = ref<Models>(Models.gpt3trubo)
   const startCommand = ref<string>('computer')
-  const stopCommand = ref<string>('stop')
+  const toggleThemeCommand = ref<string>('change theme')
   const lang = ref<Languages>(Languages.englishUS)
 
   function save() {
@@ -54,7 +54,7 @@ const SettingsStore = defineStore('settings', () => {
     VueCookieNext.setCookie('voice', voice.value)
     VueCookieNext.setCookie('model', model.value)
     VueCookieNext.setCookie('startCommands', startCommand.value)
-    VueCookieNext.setCookie('stopCommands', stopCommand.value)
+    VueCookieNext.setCookie('toggleThemeCommand', toggleThemeCommand.value)
     VueCookieNext.setCookie('lang', lang.value)
     VueCookieNext.setCookie('theme', theme.value)
   }
@@ -64,12 +64,12 @@ const SettingsStore = defineStore('settings', () => {
     voice.value = VueCookieNext.getCookie('voice') || Voices.alloy
     model.value = VueCookieNext.getCookie('model') || Models.gpt3trubo
     startCommand.value = VueCookieNext.getCookie('startCommands') || 'computer'
-    stopCommand.value = VueCookieNext.getCookie('stopCommands') || 'stop'
+    toggleThemeCommand.value = VueCookieNext.getCookie('toggleThemeCommand') || 'change theme'
     lang.value = VueCookieNext.getCookie('lang') || Languages.englishUS
     theme.value = VueCookieNext.getCookie('theme') || Themes.dark
   }
 
-  return { openaiApiKey, theme, voice, model, startCommand, stopCommand, lang, save, load }
+  return { openaiApiKey, theme, voice, model, startCommand, toggleThemeCommand, lang, save, load }
 })
 
 export { Languages, Models, SettingsStore, Themes, Voices };
