@@ -1,15 +1,33 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import LogoComp from './components/LogoComp.vue'
 import SettingsComp from './components/SettingsComp.vue'
 import ThemeSwitcher from './components/ThemeSwitcher.vue'
-import VoiceAssistant from './components/VoiceAssistant.vue'
+import GPTPlugin from '@/plugins/GPTPlugin.vue'
+import commandRecogizer from '@/stores/commandRecogizer'
+import { storeToRefs } from 'pinia'
+
+const { userInput, output } = storeToRefs(commandRecogizer())
+const { setup } = commandRecogizer()
+
+onMounted(() => {
+  setup()
+})
 </script>
 
 <template>
-  <SettingsComp />
   <LogoComp />
-  <VoiceAssistant />
+  <SettingsComp />
   <ThemeSwitcher />
+  <div id="plugins">
+    <GPTPlugin />
+  </div>
+  <p id="user-input">
+    {{ userInput }}
+  </p>
+  <p id="output">
+    {{ output }}
+  </p>
 </template>
 
 <style>
