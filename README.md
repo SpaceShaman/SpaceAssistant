@@ -41,7 +41,7 @@ You cen check it out [here](https://spaceshaman.github.io/assistant/)
 1. Create new file in `src/plugins` directory with name `PluginNamePlugin.vue`
 2. Build your plugin as follows
 
-    ``` js
+    ``` vue
     <script setup lang="ts">
     import commandRecogizer from '../stores/commandRecogizer'
     import type { CommandOption } from 'annyang'
@@ -77,7 +77,7 @@ You cen check it out [here](https://spaceshaman.github.io/assistant/)
 
 3. Import this plugin in App.vue file and add it to template
 
-    ``` js
+    ``` vue
     <template>
       <LogoComp />
       <SettingsComp />
