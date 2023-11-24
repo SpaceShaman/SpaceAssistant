@@ -1,7 +1,8 @@
 import { Voices } from '@/stores/settings'
 import { OpenAI } from 'openai'
-
-export default async (text: string, openai: OpenAI, voice: Voices = Voices.alloy) => {
+  
+export default async (apiKey: string, voice: Voices = Voices.alloy, text: string) => {
+  const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true })
   const response = await openai.audio.speech.create({
     model: 'tts-1',
     voice: voice,

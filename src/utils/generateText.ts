@@ -1,16 +1,22 @@
-import { OpenAI } from 'openai'
+import OpenAI from 'openai'
 import { Models } from '../stores/settings'
+import type { Ref } from 'vue'
 
-export default async (promt: string, openai: OpenAI, model:Models = Models.gpt3trubo): Promise<string> => {
-  const response = await openai.chat.completions.create({
+export default async (apiKey: string, model: Models = Models.gpt3trubo, promt: string, output: Ref<string>) => {
+  const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true })
+  output.value = ''
+  const completion = await openai.chat.completions.create({
+    model: model,
     messages: [
-      { role: 'system', content: 'You are a helpful assistant. You answer shortly and precise unless asked for a long answer.' },
+      { role: 'system', content: 'You are a helpful assistant.' },
       { role: 'user', content: promt }
     ],
-    model: model,
+    stream: true
   })
-  if (!response.choices[0].message.content) {
-    throw new Error('No response from OpenAI text generation')
+
+  for await (const chunk of completion) {
+    if (!chunk.choices[0].finish_reason) {
+      output.value += chunk.choices[0].delta.content
+    }
   }
-  return response.choices[0].message.content
 }

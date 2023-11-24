@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import OpenAI from 'openai'
 import { SettingsStore } from '../stores/settings'
 import generateText from '../utils/generateText'
-import textToSpeach from '../utils/textToSpeach'
+import generateSpeech from '../utils/generateSpeech'
 import commandRecogizer from '../stores/commandRecogizer'
 import type { CommandOption } from 'annyang'
 import { storeToRefs } from 'pinia'
@@ -14,19 +13,17 @@ const { openaiApiKey, model, voice, startCommand } = storeToRefs(SettingsStore()
 
 const askGPT = async (question: string) => {
   recogizer.pause()
-  const openai = new OpenAI({ apiKey: openaiApiKey.value, dangerouslyAllowBrowser: true })
-  output.value = await generateText(question, openai, model.value)
-  await textToSpeach(output.value, openai, voice.value)
+  await generateText(openaiApiKey.value, model.value, question, output)
+  await generateSpeech(openaiApiKey.value, voice.value, output.value)
   recogizer.resume()
 }
 
 onMounted(() => {
+  console.log('Innit')
   const commands: CommandOption = {
     [`${startCommand.value} *question`]: askGPT as any
   }
   recogizer.addCommands(commands)
 })
 </script>
-<template>
-  <div />
-</template>
+<template><div /></template>

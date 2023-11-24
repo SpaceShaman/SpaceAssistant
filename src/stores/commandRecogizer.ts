@@ -4,7 +4,7 @@ import type { Annyang } from 'annyang';
 import annyang from 'annyang';
 import { SettingsStore } from '@/stores/settings';
 
-export default defineStore('plugins', () => {
+export default defineStore('recogizer', () => {
     const userInput = ref<string>('')
     const output = ref<string>('')
     const recogizer = annyang as Annyang;
@@ -14,11 +14,9 @@ export default defineStore('plugins', () => {
         recogizer.addCallback('result', (userSaid) => {
             if (userSaid) {
                 userInput.value = userSaid[0]
-                console.log(userSaid)
             }
         })
         recogizer.setLanguage(lang)
-        recogizer.debug()
         recogizer.start()
         return recogizer
     }
