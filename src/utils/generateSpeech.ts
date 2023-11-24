@@ -29,7 +29,6 @@ export default async (apiKey: string, voice: Voices = Voices.alloy, text: string
           mediaSource.endOfStream();
         } else {
           sourceBuffer.appendBuffer(value);
-          console.log('appended buffer');
           await new Promise(resolve => sourceBuffer.addEventListener('updateend', resolve, { once: true }));
           readChunk();
         }

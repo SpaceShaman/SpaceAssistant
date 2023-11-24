@@ -8,7 +8,7 @@ export default async (apiKey: string, model: Models = Models.gpt3trubo, promt: s
   const completion = await openai.chat.completions.create({
     model: model,
     messages: [
-      { role: 'system', content: 'You are a helpful assistant.' },
+      { role: 'system', content: 'You are a helpful assistant. You answer the questions as briefly as possible unless you are asked to give a long answer' },
       { role: 'user', content: promt }
     ],
     stream: true
