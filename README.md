@@ -17,7 +17,7 @@ You cen check it out [here](https://spaceshaman.github.io/assistant/)
 - [vue-cookies](https://github.com/cmp-cc/vue-cookies)
 - [OpenAI API](https://platform.openai.com/docs/)
 - [annyang](https://github.com/TalAter/annyang)
-- [Bootstrap](https://getbootstrap.com/)
+- [Vuetify](https://vuetifyjs.com)
 - [SVG Repo](https://www.svgrepo.com/)
 - [Dark mode switch](https://codepen.io/mrozilla/pen/OJJNjRb)
 

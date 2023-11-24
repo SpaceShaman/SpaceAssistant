@@ -12,14 +12,15 @@
 
 <style scoped>
 h1 {
-  margin-bottom: -0.1rem;
+  display: flex;
+  align-items: center;
+  font-size: 40px;
+  justify-content: center;
 }
 .logo {
-  --size: 4.5rem;
+  --size: 70px;
   width: var(--size);
   height: var(--size);
-  fill: var(--bs-body-color);
-  margin-right: -0.5rem;
-  margin-left: -0.5rem;
+  fill: currentColor;
 }
 </style>
